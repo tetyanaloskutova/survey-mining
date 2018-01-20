@@ -20,8 +20,8 @@ def create_graph(input_path, input_file, output_path, output_file, min_freq):
     keyword_nodes = list()
     kw2response = dict() # maps a kw to the list of responses containing it
 
-    with open(os.path.join(input_path, input_file), 'rb') as csv_file:
-        next(csv_file)
+    with open(os.path.join(input_path, input_file), 'r') as csv_file:
+        #next(csv_file)
         res_reader = csv.reader(csv_file, delimiter=',')
         my_count = 0
         for row in res_reader:
@@ -72,7 +72,5 @@ def create_graph(input_path, input_file, output_path, output_file, min_freq):
     #plt.show()
     plt.savefig(os.path.join(output_path, output_file))        
 
-    
-#create_graph("C:\Users\Barbara\Dropbox\Resofact\data\output\Telkom_pride_embarassment\Telkom_pride", "Responses_keywords_pride_23102016_test.csv", "C:\Users\Barbara\Dropbox\Resofact\code\plots", 'graph_pride_' + time.strftime("%d%m%Y") + ".png")
     
     

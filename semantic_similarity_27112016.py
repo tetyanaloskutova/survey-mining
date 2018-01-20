@@ -16,15 +16,11 @@ from semantic_similarity_functions import word_similarity
 
 def calculate_keyword_semantic_similarity(test, target_word, output_directory, input_file, output_file, min_similarity_score):
  
-    # Files and paths:
-
-    #path = os.getcwd().replace("code", "data")# get path of current file, then change sub directory from "code" to "data"
-    #path_in = path + r'\output\Telkom_pride_embarassment\Telkom_' + target_word
     
     # read list of keywords:
     count_keywords = 0
     keywords = list()
-    with open(os.path.join(output_directory, input_file), 'rb') as csvfile:
+    with open(os.path.join(output_directory, input_file), 'r') as csvfile:
         next(csvfile)
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in reader:
@@ -43,16 +39,16 @@ def calculate_keyword_semantic_similarity(test, target_word, output_directory, i
     keywords = sorted(set(keywords))
     word2wordsim = dict() # maps a pair of words to their similarity score
 
-    with open(os.path.join(output_directory, output_file), 'wb') as outfile:
-        output = csv.writer(outfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+    with open(os.path.join(output_directory, output_file), 'w') as outfile:
+        output = csv.writer(outfile, delimiter=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
 
         for word1 in keywords:
             for word2 in keywords:
                 if word1 != word2:
-                    print "word1:" + str(word1)
-                    print "word2:"+str(word2)
+                    print ("word1:" + str(word1))
+                    print ("word2:"+str(word2))
                     sim = word_similarity(word1, word2)
-                    print "\tsim:"+str(sim)
+                    print ("\tsim:"+str(sim))
                     output.writerow([word1, word2, str(round(sim, 2))])
 
                     #if sim > min_similarity_score:

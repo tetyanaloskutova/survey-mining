@@ -2,13 +2,10 @@
 
 import os
 import csv
-from pytagcloud import create_tag_image, make_tags
-from pytagcloud.lang.counter import get_tag_counts
+from wordcloud import WordCloud
+#from pytagcloud import create_tag_image, make_tags
+#from pytagcloud.lang.counter import get_tag_counts
 
-# pip install pytagcloud
-# depends on: pygame, simplejson (pip install...)
-# from:
-# https://pypi.python.org/pypi/pytagcloud
 
 # test_words = ('hello', 'goodbye', 'yes')
 # test_counts = (2, 3, 1)
@@ -41,7 +38,7 @@ def create_word_cloud(input_path, input_file, out_path, out_file, type):
 
     input_words = []
     input_counts = []
-    with open(os.path.join(input_path, input_file), 'rb') as csv_file:
+    with open(os.path.join(input_path, input_file), 'r') as csv_file:
         res_reader = csv.reader(csv_file, delimiter=',')
         my_count = 0
         prev_kw = ''
@@ -76,6 +73,17 @@ def create_word_cloud(input_path, input_file, out_path, out_file, type):
     x = make_text(input_words, input_counts)
     #print x
 
-    tags = make_tags(get_tag_counts(x), maxsize=100)
-    create_tag_image(tags, os.path.join(out_path, out_file), size=(900, 600))
-    #print 'Done'
+    wordcloud = WordCloud().generate(x)
+    
+    # Display the generated image:
+    # the matplotlib way:
+    import matplotlib.pyplot as plt
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+
+    # lower max_font_size
+    wordcloud = WordCloud(max_font_size=40).generate(x)
+    plt.figure()
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.savefig(os.path.join(out_path, out_file), dpi=300)

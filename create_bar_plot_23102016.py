@@ -18,7 +18,7 @@ def create_bar_plot(input_path, input_file, output_path, output_file, n_words, t
     kw = ""
     freq = ""
     
-    with open(os.path.join(input_path, input_file), 'rb') as csv_file:
+    with open(os.path.join(input_path, input_file), 'r') as csv_file:
         res_reader = csv.reader(csv_file, delimiter=',')
         my_count = 0
         prev_kw = ''

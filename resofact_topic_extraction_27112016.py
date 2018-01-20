@@ -176,7 +176,7 @@ def extract_keywords(test, target_word, input_directory, output_directory, outpu
     # Prepare output file:
 
     outfile = open(os.path.join(output_directory, output_file_keywords_name), 'wb')
-    output = csv.writer(outfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+    output = csv.writer(outfile, delimiter=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
     output.writerow(["Id", "Response", "Keyword", "Adjectives"])
 
     # Read in input file:
@@ -410,7 +410,7 @@ def extract_keywords(test, target_word, input_directory, output_directory, outpu
     
     print "\tWriting output..."
     outfile_freq = open(os.path.join(output_directory, output_file_freq_name), 'wb')
-    output_freq = csv.writer(outfile_freq, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+    output_freq = csv.writer(outfile_freq, delimiter=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
     output_freq.writerow(
         ["Keyword", "Number of responses of keyword", "Adjective", "Number of responses of keyword and adjective"])
     kw_list = sorted(list(set(kw_list)))
