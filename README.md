@@ -1,5 +1,5 @@
 # survey-mining
-Fork from survey-mining by Barbara McGillivray and Gard Jenset (see below).
+A fork from survey-mining by Barbara McGillivray and Gard Jenset (see below).
 All scripts are for Python 3.7
 Changes:
 - WordCloud has been replaced by the new implementation found at https://github.com/amueller/word_cloud
